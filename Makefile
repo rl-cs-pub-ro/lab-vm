@@ -24,9 +24,9 @@ labvm-name = $(labvm-prefix)
 labvm-src-from = base
 # git introduces files without write access which packer cannot overwrite...
 labvm-pre-copy-cmd = rm -rf thirdparty
-labvm-script-prepare = rl-prepare.sh
 labvm-copy-scripts += $(abspath ./labvm/scripts)/
 labvm-copy-scripts += $(abspath ./thirdparty)
+labvm-script-dirs = prepare-labvm.d:prepare-full.d
 labvm-extra-rules += $(vm_zerofree_rule)
 
 # Export to VirtualBox & VMware
@@ -40,6 +40,8 @@ localvm-extra-rules += $(vm_zerofree_rule)
 $(call vm_new_layer_cloud,cloud)
 cloud-name = $(labvm-prefix)_cloud
 cloud-src-from = labvm
+cloud-copy-scripts = $(abspath $(FRAMEWORK_DIR)/scripts)/
+cloud-copy-scripts += $(VM_CLOUD_SCRIPTS_DIR)
 cloud-copy-scripts += $(abspath ./cloud/scripts)/
 cloud-extra-envs = "RL_CLOUD_ADMIN_PASSWORD=$(RL_CLOUD_ADMIN_PASSWORD)",
 cloud-extra-rules += $(vm_zerofree_rule)
