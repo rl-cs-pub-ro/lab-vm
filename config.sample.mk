@@ -2,7 +2,7 @@
 # also check out framework/config.default.mk for all variables.
 
 # Lab VM edition
-RL_LABVM_VERSION = 2025
+RL_LABVM_VERSION = 2026
 
 # Directory where .iso files are found (for base installs)
 BASE_ISO_DIR ?= $(HOME)/Downloads
